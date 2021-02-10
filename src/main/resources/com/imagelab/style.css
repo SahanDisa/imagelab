@@ -101,6 +101,13 @@
 	-fx-background-color: #4d9fbf;
     -fx-text-fill: white;
 }
+/*Apply Image Pyramids Up Filter
+ * to an image UI element
+ */
+ #imagePyramidUpFilter {
+ 	-fx-background-color: #382bcf;
+ 	-fx-text-fill: white;
+ }
 
 /*Apply threshold effects
  to an image UI element*/

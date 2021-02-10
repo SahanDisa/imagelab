@@ -7,7 +7,7 @@ import com.imagelab.operator.basic.WriteImage;
 import com.imagelab.operator.filtering.ApplyBoxFilter;
 import com.imagelab.operator.filtering.ApplyDilation;
 import com.imagelab.operator.filtering.ApplyErosion;
-import com.imagelab.operator.geotransformation.ColorMaps;
+import com.imagelab.operator.filtering.ApplyImagePyramid;
 import com.imagelab.operator.geotransformation.RotateImage;
 import com.imagelab.operator.imagebluring.ApplyBlurEffect;
 import com.imagelab.operator.imagebluring.ApplyGaussianBlurEffect;
@@ -623,6 +623,7 @@ public class DashboardController implements Initializable {
         applyDilationFilterEffect.operatorName = "APPLY-DILATION";
         applyDilationFilterEffect.elementStyleId = "applyDilationFilter";
         applyDilationFilterEffect.buildElement();
+
         
         //applyErosionFilterEffect UI element
         OperatorUIElement applyErosionFilterEffect = new OperatorUIElement() {
@@ -631,6 +632,7 @@ public class DashboardController implements Initializable {
                 return new InformationContainerView(ApplyErosion
                         .Information.OPERATOR_INFO.toString());
             }
+      
 
             @Override
             public AbstractPropertiesForm buildPropertiesFormUI() {
@@ -643,6 +645,24 @@ public class DashboardController implements Initializable {
         applyErosionFilterEffect.elementStyleId = "applyErosionFilter";
         applyErosionFilterEffect.buildElement();
 
+
+   //
+        OperatorUIElement applyPyramidUpFilterEffect = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(ApplyImagePyramid
+                        .Information.OPERATOR_INFO.toString());
+            }
+            @Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new PyramidUpFilterPropertiesForm((ApplyImagePyramid) this.operator);
+            }
+        };
+        applyPyramidUpFilterEffect.operator = new ApplyImagePyramid();
+        applyPyramidUpFilterEffect.operatorId = ApplyImagePyramid.class.getCanonicalName();
+        applyPyramidUpFilterEffect.operatorName = "PYRAMID-UP-FILTER";
+        applyPyramidUpFilterEffect.elementStyleId = "imagePyramidUpFilter";
+        applyPyramidUpFilterEffect.buildElement();
 
         //applySimpleThresholdEffect UI element.
         OperatorUIElement applySimpleThresholdEffect = new OperatorUIElement() {
@@ -744,7 +764,8 @@ public class DashboardController implements Initializable {
                 // Populating filteringOperatorsContainer.
                 applyBoxFilterEffect.element,
                 applyDilationFilterEffect.element,
-                applyErosionFilterEffect.element
+                applyErosionFilterEffect.element.
+                applyPyramidUpFilterEffect.element
         );
 
         thresholdingOperatorsContainer.setSpacing(15d);
